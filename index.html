@@ -4,14 +4,224 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Thing</title>
-    <style>
-      body {
-        background: purple;
-        color: yellow;
-      }
+    <style>/* Chat - UI */
+@import url(https://fonts.googleapis.com/css?family=Lato);
+
+* {
+	margin: 0;
+	padding: 0;
+	outline: 0;
+}
+*, *:after, *:before {
+	box-sizing: border-box;
+}
+html {
+	line-height: 1;
+}
+body {
+	background-color: #fff;
+	color: #333;
+	font-family: 'Lato', arial, sans-serif;
+	font-size: 16px;
+}
+.mobile {
+	box-shadow: 5px 5px 0 #768693;
+	height: 540px;
+	width: 300px;
+	margin: 20px auto;
+	overflow: hidden;
+	border: 0 solid #2c3e50;
+	border-width: 45px 15px 60px;
+	color: #474c57;
+	border-radius: 20px;
+}
+.chatBlock {
+	color: #000;
+	height: 100%;
+	position: relative;
+	.chatRoom {
+		height: 100%;
+		overflow-y: auto;
+	}
+	.chatFoo {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+
+		background-color: #fff;
+		border-top: 1px solid #333;
+		height: 50px;
+		width: 100%;
+	}
+}
+.chatList {
+	padding: 10px;
+	list-style: none;
+	min-height: 100%;
+	margin-bottom: -51px;
+	&:after {
+		content: '';
+		display: block;
+		height: 51px;
+	}
+	li {
+		margin: 0 0 10px;
+		span {
+			background-color: #1abc9c;
+			border-radius: 3px;
+			color: #fff;
+			display: inline-block;
+			font-size: 15px;
+			padding: 6px 12px;
+		}
+		&.userInput {
+			text-align: right;
+			span {
+				background-color: #16a085;
+			}
+		}
+	}
+}
+.icons, .inputBlock {
+	float: left;
+}
+.icons {
+	cursor: pointer;
+	font-size: 20px;
+	line-height: 50px;
+	text-align: center;
+	width: 10%;
+	&.plane {
+		cursor: default;
+		opacity: .25;
+		&.act {
+			color: #16a085;
+			opacity: 1;
+		}
+		&.err {
+			color: #c0392b;
+		}
+		&.sndng {
+			color: #2ecc71;
+		}
+	}
+}
+.inputBlock {
+	margin: 0 auto;
+	width: 80%;
+	position: relative;
+	input[type="text"] {
+		border: 0;
+		background-color: #fff;
+		font-size: 15px;
+		margin: 10px 0;
+		height: 30px;
+		padding: 0 10px;
+		width: 100%;
+		&.focus {
+			border-bottom: 1px solid #c0392b;
+		}
+	}
+}
+.error, .send {
+	display: none;
+	background: #fff;
+	position: absolute;
+	left: 5px;
+	top: 12px;
+	padding: 5px 0;
+	width: 100%;
+}
+.error {
+	color: #c0392b;
+}
+.send {
+	color: #16a085;
+}
+.inputError, .inputSending {
+	&.act {
+		display: block;
+	}
+}
     </style>
   </head>
   <body>
-    <h1>U R A PUSSY!<h1>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<div class="mobile">
+	<div class="chatBlock">
+		<div class="chatRoom">
+			<ol class="chatList">
+				<li><span>Hello</span></li>
+				<li><span>How can I help you ?</span></li>
+			</ol>
+		</div>
+		<div class="chatFoo">
+			<div class="icons camera">
+				<i class="fa fa-camera-retro"></i>
+			</div>
+			<div class="inputBlock">
+				<input id="msgInput" type="text" placeholder="Type here..."/>
+				<p class="inputError error">input field doesn't empty!</p>
+				<p class="inputSending send">Text sending...</p>
+			</div>
+			<div class="icons plane">
+				<i class="fa fa-paper-plane"></i>
+			</div>
+		</div>
+	</div>
+</div>
+    <script>
+      $(document).ready(function() {
+
+
+		$('input').blur(function() {
+			$('.plane').removeClass("act");
+		}).focus(function() {
+			$('.plane').addClass("act");
+		});
+
+		$('#msgInput').keypress(function(e) {
+			var inputValue = $('#msgInput').val();
+			if(e.keyCode==13) {
+				if(inputValue == null || inputValue == '') {
+					$(this).addClass('focus');
+					$('.inputError').addClass('act');
+					$('.plane').addClass('err');
+					setTimeout(function() {
+						$('#msgInput').removeClass('focus');
+						$('.inputError').removeClass('act');
+						$('.plane').removeClass('err');
+					}, 1000);
+				}
+				else {
+					$('.inputSending').addClass('act');
+					appendInput();
+					$('.plane').addClass("sndng");
+					customerInput();
+					setTimeout(function() {
+						$('.inputSending').removeClass('act');
+						$('#msgInput').val('');
+						$('.plane').removeClass("sndng");
+					}, 500);
+				}
+			}
+		});
+
+		function appendInput() {
+			$('.chatList').append('<li class="userInput"><span>'+$('#msgInput').val()+' </span></li>');
+		}
+
+		function customerInput() {
+			var mylist = ['This help line for complaints only', 'Yes Please', 'Ok', 'Sorry', 'I did not get you', 'Checking please wait', 'Seems everything fine from my side', 'contact nearby our stores'];
+			var i =0;
+
+			setTimeout(function(){
+				i = Math.floor(Math.random()*(mylist.length));
+				$('.chatList').append('<li><span>'+mylist[i]+' </span></li>');
+			},1000);
+		}
+
+	});
+    </script>
   </body>
 </html>
