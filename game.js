@@ -14,12 +14,12 @@ const tileXsize = 20;
 const tileYsize = 20;
 
 preloader.onupdate = x => {textBlock.innerHTML = x+' %';};
-preloader.add('./img/sprites.png', './img/finger.png',
- './sound/opening_song.mp3', './sound/opening_song.ogg',
- './sound/eating_short.mp3', './sound/eating_short.ogg',
- './sound/eatpill.mp3', './sound/eatpill.ogg',
- './sound/extra_lives.mp3', './sound/extra_lives.ogg',
- './sound/die.mp3', './sound/die.ogg',
+preloader.add('sprites.png', 'finger.png',
+ './sound/opening_song.mp3', 'opening_song.ogg',
+ './sound/eating_short.mp3', 'eating_short.ogg',
+ './sound/eatpill.mp3', 'eatpill.ogg',
+ 'extra_lives.mp3', 'extra_lives.ogg',
+ 'die.mp3', 'die.ogg',
  );
 
 
