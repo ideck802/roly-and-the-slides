@@ -15,9 +15,9 @@ const tileYsize = 20;
 
 preloader.onupdate = x => {textBlock.innerHTML = x+' %';};
 preloader.add('sprites.png', 'finger.png',
- './sound/opening_song.mp3', 'opening_song.ogg',
- './sound/eating_short.mp3', 'eating_short.ogg',
- './sound/eatpill.mp3', 'eatpill.ogg',
+ 'opening_song.mp3', 'opening_song.ogg',
+ 'eating_short.mp3', 'eating_short.ogg',
+ 'eatpill.mp3', 'eatpill.ogg',
  'extra_lives.mp3', 'extra_lives.ogg',
  'die.mp3', 'die.ogg',
  );
@@ -688,11 +688,11 @@ preloader.start().then(() => {
   ctxF.drawImage(finger, 0, 0);
   ctxF.setTransform(1,0,0,1,0,0);
 
-  sounds.opening = new Howl({preload : true, src: ['./sound/opening_song.mp3', './sound/opening_song.ogg'], volume: 0.25});
-  sounds.gesture = new Howl({preload : true, src: ['./sound/eating_short.mp3', './sound/eating_short.ogg'], volume: 0.25});
-  sounds.hurt = new Howl({preload : true, src: ['./sound/eatpill.mp3', './sound/eatpill.ogg'], volume: 0.25});
-  sounds.extralive = new Howl({preload : true, src: ['./sound/extra_lives.mp3', './sound/extra_lives.ogg'], volume: 0.25});
-  sounds.die = new Howl({preload : true, src: ['./sound/die.mp3', './sound/die.ogg'], volume: 0.25});
+  sounds.opening = new Howl({preload : true, src: ['opening_song.mp3', 'opening_song.ogg'], volume: 0.25});
+  sounds.gesture = new Howl({preload : true, src: ['eating_short.mp3', 'eating_short.ogg'], volume: 0.25});
+  sounds.hurt = new Howl({preload : true, src: ['eatpill.mp3', 'eatpill.ogg'], volume: 0.25});
+  sounds.extralive = new Howl({preload : true, src: ['extra_lives.mp3', 'extra_lives.ogg'], volume: 0.25});
+  sounds.die = new Howl({preload : true, src: ['die.mp3', 'die.ogg'], volume: 0.25});
   for (let prop in sounds) { sounds[prop].mute(!canSound); }
 
   sounds.opening.play();
